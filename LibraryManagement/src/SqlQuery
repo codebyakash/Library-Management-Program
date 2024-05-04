@@ -1,1 +1,45 @@
-
+CREATE DATABASE LIBRARY;
+use LIBRARY;
+CREATE TABLE user(
+uid int primary key auto_increment,
+email varchar(100) NOT NULL UNIQUE,
+fname varchar(50) NOT NULL,
+lname varchar(50) NOT NULL,
+mobile varchar(15) NOT NULL,
+pass varchar(50) NOT NULL,
+gender varchar(50) NOT NULL,
+address varchar(100) NOT NULL,
+roles varchar(20) default "Student",
+sts int default 1
+);
+drop table user;
+INSERT INTO user(email,fname,lname,mobile,pass,gender,address,roles)
+VALUE("admin@gmail.com","Mukesh","Kumar","9876543210","admin","Male","Amroha","Admin");
+SELECT * FROM user;
+SELECT * FROM user WHERE email="rahul@gmail.com" AND pass="1234";
+CREATE TABLE books(
+bid int primary key auto_increment,
+bookname varchar(100) NOT NULL,
+bookauthor varchar(100) NOT NULL,
+sbin varchar(20) NOT NULL,
+qty int  NOT NULL
+);
+SELECT * FROM books;
+UPDATE books set qty=11 WHERE bid=2;
+INSERT INTO books(bookname,bookauthor,sbin,qty) 
+VALUE("Python","Guido Van Rousam","3874687356",10);
+SELECT * FROM books;
+CREATE TABLE orders(
+id int primary key auto_increment,
+uid int NOT NULL,
+bid int NOT NULL,
+sts int default 1
+);
+SELECT * FROM books;
+INSERT INTO orders(uid,bid) VALUE(1,2);
+SELECT * FROM orders;
+SELECT * FROM user
+JOIN orders
+ON user.uid=orders.uid
+JOIN books
+ON orders.bid=books.bid;
